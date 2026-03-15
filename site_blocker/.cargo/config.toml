@@ -1,0 +1,15 @@
+[target.mipsel-unknown-linux-musl]
+linker = "/home/fbiedi/Documents/openwrt/openwrt-sdk-24.10.5-ramips-mt7621_gcc-13.3.0_musl.Linux-x86_64/staging_dir/toolchain-mipsel_24kc_gcc-13.3.0_musl/bin/mipsel-openwrt-linux-musl-gcc"
+
+strip = { path = "/home/fbiedi/Documents/openwrt/openwrt-sdk-24.10.5-ramips-mt7621_gcc-13.3.0_musl.Linux-x86_64/staging_dir/toolchain-mipsel_24kc_gcc-13.3.0_musl/bin/mipsel-openwrt-linux-musl-strip" }
+
+rustflags = [
+    "-C", "link-arg=-nostartfiles", # Don't use standard C startup files
+    "-C", "link-arg=-nodefaultlibs", # Don't link to the C library
+    # "-C", "link-arg=-static",
+    "-C", "target-cpu=mips32r2",
+    "-C", "target-feature=+mips32r2,+fpxx", # Ensure we stay within R2 limits
+    # "-C", "link-arg=-Wl,--gc-sections", # Garbage Collect unused sections (CRITICAL)
+    # "-C", "link-arg=-Wl,--nmagic",      # Disables page alignment (saves several KB)
+    # "-C", "link-arg=-Wl,-s",
+]
